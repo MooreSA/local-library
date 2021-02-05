@@ -9,9 +9,10 @@ const sassMiddleware = require('node-sass-middleware');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const catalogRouter = require('./routes/catalog');
+const url = require('./mongourl');
 
 const app = express();
-const mongoDB = 'mongodb+srv://dbAdmin:dbPassword@cluster0.u7huy.mongodb.net/local-library?retryWrites=true&w=majority';
+const mongoDB = url;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
