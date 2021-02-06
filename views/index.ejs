@@ -1,0 +1,25 @@
+<%- include('head') -%>
+<div class="container-fluid">
+    <div class="row">
+        <%- include ('sidebar') -%> 
+        <div class="col-sm-10">
+            <h1 class="title"><%= title %></h1>
+            <p class="intro">Welcome to Local Library!<br/> This is a website developed with the intent of learning ExpressJS</p>
+            <% if (error) { %> 
+            <div class="error">There was an error!</div>
+            <% } else { %>
+                <div class="content">
+                    <h2 class="content__header">Success!</h2>
+                    <div class="content__info">The library has the following records on file</div>
+                    <div class="content__records">
+                        <li class="content__record">Books: <%= data.bookCount %></li>
+                        <li class="content__record">Book Copies: <%= data.bookInstanceCount %></li>
+                        <li class="content__record">Copies Available: <%= data.bookInstanceAvailableCount %></li>
+                        <li class="content__record">Authors: <%= data.authorCount %></li>
+                        <li class="content__record">Genres: <%= data.genreCount %></li>
+                    </div>
+                </div>
+            <% } %> 
+        </div>
+    </div>
+</div>

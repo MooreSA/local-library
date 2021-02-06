@@ -4,7 +4,6 @@ const Book = require('../models/book');
 const Author = require('../models/author');
 const Genre = require('../models/genre');
 const BookInstance = require('../models/bookinstance');
-
 // exports.index = (req, res) => res.send('Not Implemented: Site Homepage');
 // exports.index = (req, res, _next) => res.render('cool', { title: 'neat!' });
 
@@ -41,8 +40,25 @@ exports.bookList = (req, res, next) => {
     .exec((err, listBooks) => {
       // console.log(listBooks[0].url);
       if (err) { next(err); }
+      // sort the list of books by their titles
+
       // Successful, so render
       res.render('bookList', { title: 'Book List', bookList: listBooks });
+    });
+};
+exports.bookList = (req, res, next) => {
+  Book.find({}, 'title author')
+    .populate('author')
+    .exec((err, bookList) => {
+      // console.log(listBooks[0].url);
+      if (err) { next(err); }
+      // sort the list of books by their titles
+      bookList.sort((bookA, bookB) => {
+        if (bookA.title > bookB.title) return 1;
+        return -1;
+      });
+      // Successful, so render
+      res.render('bookList', { title: 'Book List', bookList });
     });
 };
 

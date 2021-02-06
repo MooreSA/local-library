@@ -1,0 +1,27 @@
+<%- include('head') -%>
+<div class="container-fluid">
+    <div class="row">
+        <%- include ('sidebar') -%> 
+        <div class="col-sm-10">
+            <ul class="book-instances">
+                <% bookInstanceList.forEach(copy => { %>
+                    <li class="book-instance">
+                        <a href="<%= copy.url %> ">
+                            <%= copy.book.title %> | <%= copy.imprint %> 
+                            <% if (copy.status === 'Available') { %>
+                                <span class="text-success"><%= copy.status %> </span>
+                            <% } else if (copy.status === 'Maintenance') { %>
+                                <span class="text-danger"><%= copy.status %> </span>
+                            <% } else { %> 
+                                <span class="text-warning"><%= copy.status %> </span>
+                            <% } %> 
+                            <% if (copy.status !== 'Maintenance') { %>
+                                <span><%= copy.due_back %></span>
+                            <% } %>
+                        </a>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>

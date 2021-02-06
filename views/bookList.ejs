@@ -1,0 +1,17 @@
+<%- include('head') -%>
+<div class="container-fluid">
+    <div class="row">
+        <%- include ('sidebar') -%> 
+        <div class="col-sm-10">
+            <ul class="bookList">
+                <% for(let i = 0; i < bookList.length; i ++) { %>
+                    <li>
+                        <a href="<%= bookList[i].url %>">
+                            <%= bookList[i].title %> | <%= bookList[i].author.name %> 
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </div>
+</div>
