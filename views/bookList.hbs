@@ -1,0 +1,10 @@
+<h1 class="title">{{title}}</h1>
+<p class="intro">These are all the books that the library has on file!</p>
+
+<ul class="booklist">
+    {{#each bookList}}
+        <li>
+            <a href="{{this.url}}">{{this.title}} | {{this.author.name}}</a>
+        </li>
+    {{/each}}
+</ul>

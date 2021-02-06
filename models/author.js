@@ -10,13 +10,25 @@ const AuthorSchema = new Schema({
 });
 
 // setup a "Virtual" to access the full name of the author
-AuthorSchema.virtual('name').get(() => (`${this.family_name}, ${this.first_name}`));
-
-// virtual for authors lifespan
-AuthorSchema.virtual('lifespan').get(() => (this.date_of_death.getYear() - this.date_of_birth.getYear()).toString());
+// AuthorSchema.virtual('name').get(() => (`${this.family_name}, ${this.first_name}`));
+AuthorSchema
+  .virtual('name')
+  .get(function getFullName() {
+    return `${this.family_name}, ${this.first_name}`;
+  });
 
 // virtual for this url
-AuthorSchema.virtual('url').get(`/catalog/author/${this._id}`);
+AuthorSchema
+  .virtual('url')
+  .get(function getUrl() {
+    return `/catalog/author/${this._id}`;
+  });
 
+// virtual for authors lifespan
+AuthorSchema
+  .virtual('lifespan')
+  .get(function getLifeSpan() {
+    return (this.date_of_death.getYear() - this.date_of_birth.getYear()).toString();
+  });
 // export this thing
 module.exports = mongoose.model('Author', AuthorSchema);
